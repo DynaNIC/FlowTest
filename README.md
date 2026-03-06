@@ -188,6 +188,7 @@ Note: For RHEL 8 (and derived distributions), the system Python will be upgraded
   sudo dnf -y install git cmake make rpm-build gcc gcc-c++
   sudo dnf -y install libpcap-devel xxhash-libs xxhash-devel glpk-devel
   sudo dnf -y install kernel-header libbpf-devel openssl-devel
+  sudo dnf -y install python3.9-devel
   # On RHEL 9+ (and derived distributions) install additional library
   sudo dnf -y install libxdp-devel
 
@@ -211,6 +212,7 @@ Note: For RHEL 8 (and derived distributions), the system Python will be upgraded
   # Install libraries and build tools
   sudo apt-get install -y git cmake gcc g++ pkg-config
   sudo apt-get install -y libpcap-dev libxxhash-dev libglpk-dev libbpf-dev libssl-dev
+  sudo apt-get install -y install python3.9-devel
   # On Debian 12+ and Ubuntu 22.04+ install additional library
   sudo apt-get install -y libxdp-dev
 
