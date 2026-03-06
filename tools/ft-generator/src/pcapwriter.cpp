@@ -16,15 +16,20 @@
 
 namespace generator {
 
+static void FClose(std::FILE* fp)
+{
+	if (fp != nullptr) {
+		std::fclose(fp);
+	}
+}
+
 PcapWriter::PcapWriter(const std::string& filename)
 {
 	// We need to use pcap_dump_fopen to be able to check for write errors.
 	// Unfortunately pcap_dump does not return any value to indicate errors, so we have to check the
 	// FILE* directly to detect write errors.
 	// fopen is done by us, fclose is done by pcap_dump_close.
-	std::unique_ptr<std::FILE, decltype(&std::fclose)> fp(
-		std::fopen(filename.c_str(), "wb"),
-		&std::fclose);
+	std::unique_ptr<std::FILE, decltype(&FClose)> fp(std::fopen(filename.c_str(), "wb"), &FClose);
 	if (!fp) {
 		throw std::runtime_error("file open failed: " + std::string(std::strerror(errno)));
 	}
