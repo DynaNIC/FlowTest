@@ -48,6 +48,8 @@
   ansible.builtin.template:
     src: files/rss_conf.yaml
     dest: /tmp/rss_conf.yaml
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 
 - name: Configure RSS of FPGA card ({{ nfb_card }})
   ansible.builtin.command: "ndk-nic-ctl -d {{ nfb_card }} -i {{ item }} --rss_conf /tmp/rss_conf.yaml"

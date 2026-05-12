@@ -17,6 +17,8 @@
   ansible.builtin.copy:
     src: flowtest-nfb-tsu@.service
     dest: /run/systemd/system/flowtest-nfb-tsu@.service
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 
 - name: "{{ nfb_tsu_enable | ternary(\"Enable\", \"Disable\") }} NFB-TSU systemd service"
   ansible.builtin.systemd:
