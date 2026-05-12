@@ -2,77 +2,95 @@
 - name: libpcap library is installed
   ansible.builtin.dnf:
     name:
-      - libpcap
-      - libpcap-devel
+    - libpcap
+    - libpcap-devel
     state: latest
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: xxhash library is installed
   ansible.builtin.dnf:
     name:
-      - xxhash-libs
-      - xxhash-devel
+    - xxhash-libs
+    - xxhash-devel
     state: latest
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: glpk library is installed
   ansible.builtin.dnf:
     name:
-      - glpk
-      - glpk-devel
+    - glpk
+    - glpk-devel
     state: latest
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: kernel-headers are updated
   ansible.builtin.dnf:
     name: kernel-headers
     state: latest
     disable_excludes: all
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: libbpf library is installed
   ansible.builtin.dnf:
     name:
-      - libbpf
-      - libbpf-devel
+    - libbpf
+    - libbpf-devel
     state: latest
     enablerepo: "{{ extra_repos }}"
   vars:
     extra_repos: "{{ ['ol8_UEKR7'] if ansible_os_family == 'RedHat' and ansible_distribution_major_version | int == 8 else [] }}"
 
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: libxdp library is installed
   ansible.builtin.dnf:
     name:
-      - libxdp
-      - libxdp-devel
+    - libxdp
+    - libxdp-devel
     state: latest
   when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution_major_version | int > 8
+  - ansible_os_family == 'RedHat'
+  - ansible_distribution_major_version | int > 8
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: openssl library is installed
   ansible.builtin.dnf:
     name:
-      - openssl
-      - openssl-devel
+    - openssl
+    - openssl-devel
     state: latest
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: dpdk library is installed
   ansible.builtin.dnf:
     name:
-      - dpdk
-      - dpdk-devel
-      - dpdk-tools
+    - dpdk
+    - dpdk-devel
+    - dpdk-tools
     state: latest
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: numa library is installed
   ansible.builtin.dnf:
     name:
-      - numactl
-      - numactl-devel
-      - numactl-libs
+    - numactl
+    - numactl-devel
+    - numactl-libs
     state: latest
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: python3-devel is installed (for pybind11)
   ansible.builtin.dnf:
     name:
-      - "{{ package }}"
+    - "{{ package }}"
     state: latest
   vars:
     package: "{{ 'python39-devel' if ansible_distribution_major_version | int == 8 else 'python3-devel' }}"
+    ansible_python_interpreter: /usr/bin/python3.6

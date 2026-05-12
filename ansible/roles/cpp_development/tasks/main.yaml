@@ -2,27 +2,35 @@
 - name: Make/CMake/rpmbuild is installed
   ansible.builtin.dnf:
     name:
-      - cmake
-      - make
-      - rpm-build
+    - cmake
+    - make
+    - rpm-build
     state: latest
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: GCC is installed
   ansible.builtin.dnf:
     name:
-      - gcc
-      - gcc-c++
+    - gcc
+    - gcc-c++
     state: latest
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: Clang is installed
   ansible.builtin.dnf:
     name:
-      - clang
+    - clang
     state: latest
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: Static analysis tools are installed
   ansible.builtin.dnf:
     name:
-      - cppcheck
-      - clang-tools-extra
+    - cppcheck
+    - clang-tools-extra
     state: latest
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6

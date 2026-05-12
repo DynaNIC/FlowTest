@@ -22,6 +22,8 @@
     name: "ndk-fw-{{ card_firmware }}"
     state: latest
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: Boot the FPGA card ({{ nfb_card }}) with the firmware ({{ card_firmware }})
   ansible.builtin.command: "nfb-boot -d {{ nfb_card }} -b 0 \"{{ firmware_path }}\""
   vars:

@@ -2,10 +2,12 @@
 - name: Python3 is installed
   ansible.builtin.dnf:
     name:
-      - python3
-      - python3-pip
+    - python3
+    - python3-pip
     state: latest
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: Pipx is installed (over pip)
   ansible.builtin.command: pip3 install pipx
 

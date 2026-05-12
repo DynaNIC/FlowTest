@@ -10,7 +10,11 @@
   with_items: "{{ ipfixprobe_package_list | difference([ipfixprobe_package]) }}"
   when: "item in ansible_facts.packages"
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: "{{ ipfixprobe_package }} is installed"
   ansible.builtin.dnf:
     name: "{{ ipfixprobe_package }}"
     state: latest
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6

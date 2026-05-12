@@ -4,7 +4,11 @@
     name: flowtest
     state: latest
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
 - name: tcpreplay is installed
   ansible.builtin.dnf:
     name: tcpreplay
     state: latest
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
