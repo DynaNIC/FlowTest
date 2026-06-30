@@ -66,13 +66,13 @@
 
   vars:
     ansible_python_interpreter: /usr/bin/python3.6
-- name: dpdk library is installed
-  ansible.builtin.dnf:
-    name:
-    - dpdk
-    - dpdk-devel
-    - dpdk-tools
-    state: latest
+# - name: dpdk library is installed
+#   ansible.builtin.dnf:
+#     name:
+#     - dpdk
+#     - dpdk-devel
+#     - dpdk-tools
+#     state: latest
 
   vars:
     ansible_python_interpreter: /usr/bin/python3.6
