@@ -29,19 +29,13 @@ void NfbQueue::SetupNdpQueue(unsigned queueId)
 {
 	_txPacket = std::make_unique<ndp_packet[]>(_queueConfig.maxBurstSize);
 
-	// TODO BH FIX: each queue on different DMA and odd ID
-	static unsigned qId = 1;
-	// unsigned qID_offset = 4; // TMPk
-	unsigned qID_offset = 8; // Total of 32 channels
-	// unsigned qID_offset = 16; // Total of 64 channels
-	queueId = qId;
-	qId += qID_offset;
+	// TODO BH FIX: each queue on different DMA and odd ID -- NEW Hack for 400Gbps DYNANIC
+        int queues = ndp_get_rx_queue_count(_nfbDevice);
+        int blocks = 4; // assumption for 4x100GbE DMA blocks
+	int bsize = queues / blocks;
 
-	// // TODO BH FIX: This only allows odd queues
-	// if (queueId % 2 == 0)
-	// 	queueId += 1;
-
-	printf("QUEUE ID: %u\n", queueId);
+	queueId = (queueId % blocks) * bsize + ((queueId / blocks) * 2 + 1) % bsize;
+        printf("QUEUE ID: %u\n", queueId);
 
 	_txQueue.reset(ndp_open_tx_queue(_nfbDevice, queueId));
 	if (!_txQueue) {
